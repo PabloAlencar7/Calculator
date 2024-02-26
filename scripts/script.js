@@ -42,11 +42,10 @@ buttons.forEach((button) => {
       case "=":
         try {
           if (expression.innerHTML.length > 0) {
-            // expressionDisplay.innerHTML = expression.innerHTML;
-            // expression.innerHTML = String(
-            //   eval(expression.innerHTML.replace("x", "*").replace("%", "/100"))
-            // ).slice(0, totalNumbers);
-            expression.innerHTML = "Hello World!";
+            expressionDisplay.innerHTML = expression.innerHTML;
+            expression.innerHTML = String(
+              eval(expression.innerHTML.replace("x", "*").replace("%", "/100"))
+            ).slice(0, totalNumbers);
           }
         } catch (error) {
           console.error(error);
