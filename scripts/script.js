@@ -3,6 +3,17 @@
 const expression = document.querySelector(".expression");
 const expressionDisplay = document.querySelector(".expressionDisplay");
 const buttons = document.querySelectorAll(".gridButtons button");
+const buttonHistory = document.querySelector(".buttonHistory");
+const modalHistory = document.querySelector(".modalHistory");
+const buttonCloseModal = document.querySelector(".buttonCloseModal");
+
+buttonHistory.addEventListener("click", () => {
+  modalHistory.showModal();
+});
+
+buttonCloseModal.addEventListener("click", () => {
+  modalHistory.close();
+});
 
 function clearScreen() {
   expression.innerHTML = "";
@@ -31,10 +42,11 @@ buttons.forEach((button) => {
       case "=":
         try {
           if (expression.innerHTML.length > 0) {
-            expressionDisplay.innerHTML = expression.innerHTML;
-            expression.innerHTML = String(
-              eval(expression.innerHTML.replace("x", "*").replace("%", "/100"))
-            ).slice(0, totalNumbers);
+            // expressionDisplay.innerHTML = expression.innerHTML;
+            // expression.innerHTML = String(
+            //   eval(expression.innerHTML.replace("x", "*").replace("%", "/100"))
+            // ).slice(0, totalNumbers);
+            expression.innerHTML = "Hello World!";
           }
         } catch (error) {
           console.error(error);
