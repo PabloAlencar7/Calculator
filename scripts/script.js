@@ -18,6 +18,20 @@ buttonCloseModal.addEventListener("click", () => {
   modalHistory.close();
 });
 
+buttonClearHistory.addEventListener("click", () => {
+  const calculatorHistory = JSON.parse(
+    localStorage.getItem("@calculator:history")
+  );
+
+  if (calculatorHistory) {
+    const responseToClear = confirm("Deseja limpar o histórico?");
+    if (responseToClear) {
+      localStorage.removeItem("@calculator:history");
+      updateHistory();
+    }
+  }
+});
+
 function clearScreen() {
   expression.innerHTML = "";
   expressionDisplay.innerHTML = "";
@@ -30,25 +44,25 @@ function updateHistory() {
 
   containerHistory.innerHTML = "";
   if (calculatorHistory) {
-    calculatorHistory.forEach((value) => {
-      const boxHistory = document.createElement('div');
-      boxHistory.className = 'boxHistory';
-  
-      const expressionHistory = document.createElement('div');
-      expressionHistory.className = 'expressionHistory';
+    calculatorHistory.reverse().forEach((value) => {
+      const boxHistory = document.createElement("div");
+      boxHistory.className = "boxHistory";
+
+      const expressionHistory = document.createElement("div");
+      expressionHistory.className = "expressionHistory";
       expressionHistory.textContent = value.expression;
-  
-      const resultHistory = document.createElement('div');
-      resultHistory.className = 'resultHistory';
+
+      const resultHistory = document.createElement("div");
+      resultHistory.className = "resultHistory";
       resultHistory.textContent = value.result;
-  
+
       boxHistory.appendChild(expressionHistory);
       boxHistory.appendChild(resultHistory);
-  
+
       containerHistory.appendChild(boxHistory);
-  });
+    });
   } else {
-    containerHistory.innerHTML = `<div class="emptyHistory">Vazio</div>`;
+    containerHistory.innerHTML = `<div class="emptyHistory">Vazio Ilimitado.</div>`;
   }
 }
 
@@ -88,7 +102,7 @@ buttons.forEach((button) => {
             localStorage.setItem(
               "@calculator:history",
               JSON.stringify([
-                ...calculatorHistory,
+                ...calculatorHistory.slice(-20), // limit history
                 {
                   result: expression.innerHTML,
                   expression: expressionDisplay.innerHTML,
@@ -106,7 +120,6 @@ buttons.forEach((button) => {
               ])
             );
           }
-
         } catch (error) {
           console.error(error);
           expression.innerHTML = "Error";
