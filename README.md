@@ -12,4 +12,4 @@ Este projeto foi desenvolvido na conclusão do módulo de JavaScript do curso de
 
 ## Links
 
-- [Deploy](https://github.com/PabloAlencar7/Calculator)
+- [Deploy](pabloalencar7.github.io/Calculator/)
